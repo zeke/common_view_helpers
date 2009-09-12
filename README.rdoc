@@ -1,0 +1,19 @@
+= Common View Helpers
+
+A set of view helpers I find myself using in most Rails applications.
+
+== Installation
+
+  cd my_rails_app
+  script/plugin install git://github.com/zeke/common_view_helpers.git
+
+== Summary
+
+* *time_ago_in_words_or_date(date,options={})* uses words if within the last week, otherwise uses date. Shows year if not this year
+* *convert_to_list_items(items)* takes an array, and gives back a string of <li> elements. {See the full post}[http://zeke.tumblr.com/post/98025647/a-nice-little-view-helper-for-generating-list-items].
+* *link(name, options={}, html_options={})* works just like link_to, but with one difference: If the link is to the current page, a class of 'active' is added. {See the full post}[http://zeke.tumblr.com/post/129164334/a-new-twist-on-link-to-unless-current].
+* *info_pair(label, value)* outputs an easily styleable key-value pair
+* *base_url* gives you the current host's full URL, including the port. e.g. http://localhost:3000, or https://productionserver.com
+* *list_model_columns(obj)* generates a list of column name-value pairs for an AR object
+
+Copyright (c) 2009 {Zeke Sikelianos}[http://zeke.sikelianos.com], released under the MIT license
