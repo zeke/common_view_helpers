@@ -23,7 +23,7 @@ module CommonViewHelpers
     # This makes it easier to apply CSS styles to lists, be they ordered or unordered.
     # http://zeke.tumblr.com/post/98025647/a-nice-little-view-helper-for-generating-list-items
     def convert_to_list_items(items)
-      items.remove_blanks.inject([]) do |all, item|
+      items.inject([]) do |all, item|
         css = []
         css << "first" if items.first == item
         css << "last" if items.last == item
