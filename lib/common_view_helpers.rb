@@ -6,8 +6,10 @@ module CommonViewHelpers
       return nil unless date
       if (Time.now-date)/60/60/24 < 7
         time_ago_in_words(date) + " ago"
+      elsif date.year == Time.now.year
+        date.strftime("%e %b")
       else
-        options[:medium] ? date.strftime("%m/%d/%y") : date.to_s(:medium)
+        date.strftime("%e %b %Y")
       end
     end
   
