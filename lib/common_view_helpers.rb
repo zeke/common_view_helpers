@@ -3,13 +3,13 @@ module CommonViewHelpers
 
     # Use words if within the last week, otherwise use date (show year if not this year)
     def time_ago_in_words_or_date(date,options={})
-      return nil unless date
+      return unless date
       if (Time.now-date)/60/60/24 < 7
         time_ago_in_words(date) + " ago"
       elsif date.year == Time.now.year
-        date.strftime("%e %b")
+        options[:short_format] ? date.strftime(options[:short_format]) : date.strftime("%b %e").gsub("  ", " ")
       else
-        date.strftime("%e %b %Y")
+        options[:long_format] ? date.strftime(options[:long_format]) : date.strftime("%b %e, %Y").gsub("  ", " ")
       end
     end
   

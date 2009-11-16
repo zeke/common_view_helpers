@@ -18,12 +18,12 @@ describe CommonViewHelpers do
     end
     
     it "should use short format for non-relative dates in the last year" do
-      time_ago_in_words_or_date(Time.now - 8.days).should =~ /\d+ \w{3}/i
-      time_ago_in_words_or_date(Time.now - 6.months).should =~ /\d+ \w{3}/i
+      time_ago_in_words_or_date(Time.now - 8.days).should =~ /\w{3} \d+/i
+      time_ago_in_words_or_date(Time.now - 6.months).should =~ /\w{3} \d+/i
     end
     
     it "should display year format for non-relative dates beyond one year ago" do
-      time_ago_in_words_or_date(Time.now - 13.months).should =~ /\d+ \w{3} \d{4}/i
+      time_ago_in_words_or_date(Time.now - 13.months).should =~ /\w{3} \d+, \d{4}/i
     end
   end
 end
