@@ -32,6 +32,27 @@ module CommonViewHelpers
         all << content_tag(:li, item, :class => css.join(" "))
       end.join("\n")
     end
+    
+    # Build an HTML table
+    # For collection, pass an array of arrays
+    # For headers, pass an array of label strings for the top of the table
+    # All other options will be passed along to the table content_tag  
+    def generate_table(collection, headers=nil, options={})
+      return if collection.blank?
+      thead = content_tag(:thead) do
+        content_tag(:tr) do
+          headers.map {|header| content_tag(:th, header)}
+        end
+      end unless headers.nil?
+      tbody = content_tag(:tbody) do
+        collection.map do |values|
+          content_tag(:tr) do
+            values.map {|value| content_tag(:td, value)}
+          end
+        end
+      end
+      content_tag(:table, [thead, tbody].compact.join("\n"), options)
+    end
 
     # This works just like link_to, but with one difference..
     # If the link is to the current page, a class of 'active' is added
