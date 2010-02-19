@@ -53,6 +53,15 @@ module CommonViewHelpers
       end
       content_tag(:table, [thead, tbody].compact.join("\n"), options)
     end
+    
+    # Pass in an ActiveRecord object, get back edit and delete links inside a TD tag
+    def options_td(record_or_name_or_array, hide_destroy = false)
+      items = []
+      items << link_to('Edit', edit_polymorphic_path(record_or_name_or_array))
+      items << link_to('Delete', polymorphic_path(record_or_name_or_array), :confirm => 'Are you sure?', :method => :delete, :class => "destructive") unless hide_destroy
+      list = content_tag(:ul, convert_to_list_items(items))
+      content_tag(:td, list, :class => "options")
+    end
 
     # This works just like link_to, but with one difference..
     # If the link is to the current page, a class of 'active' is added
