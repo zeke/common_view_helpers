@@ -24,15 +24,21 @@ module CommonViewHelpers
     # The first item gets a class of first and the last, well.. last. 
     # This makes it easier to apply CSS styles to lists, be they ordered or unordered.
     # http://zeke.tumblr.com/post/98025647/a-nice-little-view-helper-for-generating-list-items
-    def convert_to_list_items(items)
-      items.inject([]) do |all, item|
+    def convert_to_list_items(items, *args)
+      default_options = {:stripe => true}
+      options = default_options.merge(args.extract_options!)
+      out = []
+      items.each_with_index do |item, index|
         css = []
         css << "first" if items.first == item
         css << "last" if items.last == item
-        all << content_tag(:li, item, :class => css.join(" "))
-      end.join("\n")
+        css << "even" if options[:stripe] && index%2 == 1
+        css << "odd" if options[:stripe] && index%2 == 0 # (First item is odd (1))
+        out << content_tag(:li, item, :class => css.join(" "))
+      end
+      out.join("\n")
     end
-    
+  
     # Build an HTML table
     # For collection, pass an array of arrays
     # For headers, pass an array of label strings for the top of the table
